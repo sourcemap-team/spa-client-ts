@@ -1,0 +1,12 @@
+#ENVIRONMENT VARIABLES
+.env
+
+#YARN MODULES
+node_modules
+
+# idea
+.idea
+
+#BUILD
+build
+
