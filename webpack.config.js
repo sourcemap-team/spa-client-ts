@@ -9,6 +9,7 @@ module.exports = () => {
   return {
     entry: './src/index.js',
     output: {
+      publicPath: '/',
       filename: 'main.js',
       path: path.resolve(__dirname, 'build'),
     },
@@ -34,6 +35,7 @@ module.exports = () => {
       static: {
         directory: path.join(__dirname, 'build'),
       },
+      historyApiFallback: true,
       port: config.PORT || 3000,
     },
     resolve: {

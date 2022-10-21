@@ -1,13 +1,26 @@
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Form, Input } from 'antd';
+import { useAuth } from '../../context/Auth.jsx';
+import { Link } from 'react-router-dom';
 
-const AuthPage = () => {
+const RegisterPage = () => {
+  const { login } = useAuth();
+
+  const onFinish = (values) => {
+    login(values);
+  };
+  const onFinishFailed = (errorInfo) => {
+    console.log('Failed:', errorInfo);
+  };
+
   return (
     <Form
       name="basic"
       labelCol={{ span: 8 }}
       wrapperCol={{ span: 16 }}
       initialValues={{ remember: true }}
-      autoComplete="off"
+      onFinish={onFinish}
+      onFinishFailed={onFinishFailed}
+      autoComplete="on"
     >
       <Form.Item
         label="Username"
@@ -26,11 +39,11 @@ const AuthPage = () => {
       </Form.Item>
 
       <Form.Item
-        name="remember"
-        valuePropName="checked"
-        wrapperCol={{ offset: 8, span: 16 }}
+        label="Password confirm"
+        name="passwordConfirm"
+        rules={[{ required: true, message: 'Please confirm your password!' }]}
       >
-        <Checkbox>Remember me</Checkbox>
+        <Input.Password />
       </Form.Item>
 
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
@@ -38,8 +51,11 @@ const AuthPage = () => {
           Submit
         </Button>
       </Form.Item>
+      <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+        <Link to={'/login'}>Log in</Link>
+      </Form.Item>
     </Form>
   );
 };
 
-export default AuthPage;
+export default RegisterPage;
