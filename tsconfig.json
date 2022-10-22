@@ -15,7 +15,9 @@
       "@pages/*": ["pages/*"],
       "@components/*": ["components/*"],
       "@hooks/*": ["hooks/*"],
-      "@context/*": ["context/*"]
+      "@context/*": ["context/*"],
+      "@store/*": ["store/*"],
+      "@services/*": ["services/*"]
     }
   },
 }
