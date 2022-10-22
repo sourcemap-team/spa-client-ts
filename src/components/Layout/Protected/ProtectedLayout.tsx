@@ -1,12 +1,13 @@
+import React, { FC } from 'react';
 import { Layout } from 'antd';
 import { Navigate, Outlet } from 'react-router-dom';
 
-import { useAuth } from '../../../context/Auth.jsx';
-import TopMenu from '../../TopMenu/TopMenu.jsx';
+import { useAuth } from '@context/Auth';
+import TopMenu from '@components/TopMenu/TopMenu';
 
 const { Header, Content, Footer } = Layout;
 
-export const ProtectedLayout = () => {
+export const ProtectedLayout: FC = () => {
   const { user } = useAuth();
 
   if (!user) {

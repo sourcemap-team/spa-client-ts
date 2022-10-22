@@ -1,10 +1,11 @@
+import React, { FC } from 'react';
 import { Layout } from 'antd';
-import { Link, Navigate, Outlet } from 'react-router-dom';
-import { useAuth } from '../../../context/Auth.jsx';
+import { Navigate, Outlet } from 'react-router-dom';
+import { useAuth } from '@context/Auth';
 
 const { Footer, Content } = Layout;
 
-export const UnauthorizedLayout = () => {
+export const UnauthorizedLayout: FC = () => {
   const { user } = useAuth();
 
   if (user) {

@@ -1,15 +1,16 @@
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import IndexPage from './pages/index/index.jsx';
-import DashboardPage from './pages/dashboard/dashboard.jsx';
-import ProfilePage from './pages/profile/profile.jsx';
-import SettingsPage from './pages/settings/settings.jsx';
+import IndexPage from '@pages/index/index';
+import DashboardPage from '@pages/dashboard/dashboard';
+import ProfilePage from '@pages/profile/profile';
+import SettingsPage from '@pages/settings/settings';
 
-import LoginPage from './pages/login/login.jsx';
-import RegisterPage from './pages/register/register.jsx';
+import LoginPage from '@pages/login/login';
+import RegisterPage from '@pages/register/register';
 
-import { ProtectedLayout } from './components/Layout/Protected/ProtectedLayout.jsx';
-import { UnauthorizedLayout } from './components/Layout/Unauthorized/UnauthorizedLayout.jsx';
+import { ProtectedLayout } from '@components/Layout/Protected/ProtectedLayout';
+import { UnauthorizedLayout } from '@components/Layout/Unauthorized/UnauthorizedLayout';
 
 const App = () => {
   return (

@@ -1,9 +1,10 @@
-import { Button, Checkbox, Form, Input } from 'antd';
-import { useAuth } from '../../context/Auth.jsx';
+import React, { FC } from 'react';
+import { Button, Form, Input } from 'antd';
+import { useAuth } from '@context/Auth';
 import { Link } from 'react-router-dom';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
 
-const AuthPage = () => {
+const RegisterPage: FC = () => {
   const { login } = useAuth();
 
   const onFinish = (values) => {
@@ -13,15 +14,14 @@ const AuthPage = () => {
   return (
     <div style={{ margin: '64px auto' }}>
       <h2 style={{ textAlign: 'center', marginBottom: '44px' }}>
-        Sign In to Platform
+        Sign Up to Platform
       </h2>
       <div style={{ maxWidth: '320px', margin: '0 auto' }}>
         <Form
-          name="normal_login"
-          initialValues={{
-            remember: true,
-          }}
+          name="basic"
+          initialValues={{ remember: true }}
           onFinish={onFinish}
+          autoComplete="on"
         >
           <Form.Item
             name="username"
@@ -52,14 +52,20 @@ const AuthPage = () => {
               placeholder="Password"
             />
           </Form.Item>
-          <Form.Item>
-            <Form.Item name="remember" valuePropName="checked" noStyle>
-              <Checkbox>Remember me</Checkbox>
-            </Form.Item>
-
-            <a className="login-form-forgot" href="">
-              Forgot password
-            </a>
+          <Form.Item
+            name="passwordConfirm"
+            rules={[
+              {
+                required: true,
+                message: 'Please confirm your Password!',
+              },
+            ]}
+          >
+            <Input
+              prefix={<LockOutlined className="site-form-item-icon" />}
+              type="password"
+              placeholder="Password confirmation"
+            />
           </Form.Item>
 
           <Form.Item>
@@ -68,9 +74,9 @@ const AuthPage = () => {
               htmlType="submit"
               className="login-form-button"
             >
-              Log in
+              Sign Up
             </Button>
-            Or <Link to="/register">register now!</Link>
+            &nbsp;Or&nbsp;<Link to="/login">Sign In!</Link>
           </Form.Item>
         </Form>
       </div>
@@ -78,4 +84,4 @@ const AuthPage = () => {
   );
 };
 
-export default AuthPage;
+export default RegisterPage;

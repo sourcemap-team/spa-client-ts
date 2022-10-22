@@ -1,3 +1,4 @@
+import React, { FC } from 'react';
 import { Menu } from 'antd';
 import {
   UserOutlined,
@@ -6,9 +7,9 @@ import {
 } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 
-import { useAuth } from '../../context/Auth.jsx';
+import { useAuth } from '@context/Auth';
 
-const TopMenu = () => {
+const TopMenu: FC = () => {
   const { logout } = useAuth();
   const handleRightMenuItemClick = ({ key }) => {
     if (key === 'logout') {
@@ -31,9 +32,6 @@ const TopMenu = () => {
       label: <Link to="/settings">Settings</Link>,
       key: 'settings',
       icon: <SettingOutlined />,
-    },
-    {
-      type: 'divider',
     },
     {
       label: 'Logout',

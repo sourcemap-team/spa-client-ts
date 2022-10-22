@@ -1,0 +1,21 @@
+{
+
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "outDir": "./build/",
+    "noImplicitAny": false,
+    "sourceMap": true,
+    "module": "es6",
+    "target": "es5",
+    "jsx": "react",
+    "allowJs": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "paths": {
+      "@pages/*": ["pages/*"],
+      "@components/*": ["components/*"],
+      "@hooks/*": ["hooks/*"],
+      "@context/*": ["context/*"]
+    }
+  },
+}

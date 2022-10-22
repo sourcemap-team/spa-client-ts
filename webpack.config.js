@@ -7,7 +7,8 @@ const { parsed: config } = require('dotenv').config({
 
 module.exports = () => {
   return {
-    entry: './src/index.js',
+    entry: './src/index.tsx',
+    devtool: 'inline-source-map',
     output: {
       publicPath: '/',
       filename: 'main.js',
@@ -19,6 +20,11 @@ module.exports = () => {
           test: /\.(js|jsx)$/,
           exclude: /node_modules/,
           use: ['babel-loader'],
+        },
+        {
+          test: /\.tsx?$/,
+          use: 'ts-loader',
+          exclude: /node_modules/,
         },
         {
           test: /\.css$/i,
@@ -39,7 +45,13 @@ module.exports = () => {
       port: config.PORT || 3000,
     },
     resolve: {
-      extensions: ['*', '.js', 'jsx'],
+      extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      alias: {
+        '@components': path.resolve(__dirname, 'src/components'),
+        '@hooks': path.resolve(__dirname, 'src/hooks'),
+        '@pages': path.resolve(__dirname, 'src/pages'),
+        '@context': path.resolve(__dirname, 'src/context'),
+      },
     },
   };
 };
