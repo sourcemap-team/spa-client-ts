@@ -20,4 +20,5 @@
       "@services/*": ["services/*"]
     }
   },
+ "include": ["./custom.d.ts"]
 }

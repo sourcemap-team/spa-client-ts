@@ -17,18 +17,13 @@ module.exports = () => {
     module: {
       rules: [
         {
-          test: /\.(js|jsx)$/,
-          exclude: /node_modules/,
-          use: ['babel-loader'],
-        },
-        {
           test: /\.tsx?$/,
           use: 'ts-loader',
           exclude: /node_modules/,
         },
         {
           test: /\.css$/i,
-          use: ['style-loader', 'css-loader'],
+          use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
         },
       ],
     },
@@ -42,10 +37,10 @@ module.exports = () => {
         directory: path.join(__dirname, 'build'),
       },
       historyApiFallback: true,
-      port: config.PORT || 3000,
+      port: config?.PORT || 3000,
     },
     resolve: {
-      extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      extensions: ['.js', '.jsx', '.ts', '.tsx', '.scss'],
       alias: {
         '@components': path.resolve(__dirname, 'src/components'),
         '@hooks': path.resolve(__dirname, 'src/hooks'),

@@ -5,6 +5,7 @@ import {
   SettingOutlined,
   LogoutOutlined,
 } from '@ant-design/icons';
+
 import { Link } from 'react-router-dom';
 
 import { useAuth } from '@context/Auth';
@@ -48,16 +49,10 @@ const TopMenu: FC = () => {
         justifyContent: 'space-between',
       }}
     >
+      <Menu theme="dark" mode="horizontal" items={leftItems} />
       <Menu
         theme="dark"
         mode="horizontal"
-        defaultSelectedKeys={['home']}
-        items={leftItems}
-      />
-      <Menu
-        theme="dark"
-        mode="horizontal"
-        defaultSelectedKeys={['mail']}
         overflowedIndicator={<SettingOutlined />}
         items={rightItems}
         onClick={handleRightMenuItemClick}
