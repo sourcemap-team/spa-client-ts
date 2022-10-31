@@ -4,7 +4,10 @@ import {
   UserOutlined,
   SettingOutlined,
   LogoutOutlined,
+  CodepenCircleOutlined,
 } from '@ant-design/icons';
+
+import { gold } from '@ant-design/colors';
 
 import { Link } from 'react-router-dom';
 
@@ -17,11 +20,6 @@ const TopMenu: FC = () => {
       logout();
     }
   };
-
-  const leftItems = [
-    { label: <Link to="/">Home</Link>, key: 'home' }, // remember to pass the key prop
-    { label: <Link to="/dashboard">Dashboard</Link>, key: 'dashboards' }, // which is required
-  ];
 
   const rightItems = [
     {
@@ -49,7 +47,16 @@ const TopMenu: FC = () => {
         justifyContent: 'space-between',
       }}
     >
-      <Menu theme="dark" mode="horizontal" items={leftItems} />
+      <Link to="/">
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+          }}
+        >
+          <CodepenCircleOutlined style={{ fontSize: '32px', color: gold[0] }} />
+        </div>
+      </Link>
       <Menu
         theme="dark"
         mode="horizontal"

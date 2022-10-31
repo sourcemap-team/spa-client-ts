@@ -9,7 +9,7 @@ import { AuthProvider } from '@context/Auth';
 
 import App from './App';
 
-import { store } from '@store/index';
+import { store } from './store';
 
 const container = document.getElementById('root');
 const root = createRoot(container);

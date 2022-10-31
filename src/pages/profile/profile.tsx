@@ -1,13 +1,21 @@
 import React, { FC } from 'react';
 
-import { useGetUserByNameQuery } from '@services/auth';
+import { PageHeader } from 'antd';
+import { useNavigate } from 'react-router-dom';
+
+import ProfileForm from '@modules/profile/Form';
 
 const ProfilePage: FC = () => {
-  useGetUserByNameQuery('bulbasaur');
+  const navigate = useNavigate();
 
   return (
     <div>
-      <h1>Profile</h1>
+      <PageHeader
+        title="Profile info"
+        subTitle="Name Surname"
+        onBack={() => navigate(-1)}
+      />
+      <ProfileForm />
     </div>
   );
 };

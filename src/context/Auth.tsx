@@ -1,9 +1,9 @@
 import React, { FC, ReactNode } from 'react';
 import { createContext, useContext, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useLocalStorage } from '../hooks/useLocalStorage';
-import { User } from '../../custom';
-
+import { LoginData, RegistrationRequestData } from '../../custom';
+import { useLoginUserMutation, useRegisterUserMutation } from '@services/auth';
+import { message } from 'antd';
 export const AuthContext = createContext(null);
 
 type Props = {
@@ -11,28 +11,70 @@ type Props = {
 };
 
 export const AuthProvider: FC<Props> = ({ children }) => {
-  const [user, setUser] = useLocalStorage('user', null);
   const navigate = useNavigate();
+  const [registerUser, registerResponse] = useRegisterUserMutation();
+  const [loginUser, loginResponse] = useLoginUserMutation();
 
-  // call this function when you want to authenticate the user
-  const login = async (userData: User) => {
-    setUser(userData);
-    navigate('/');
+  const login = async (userData: LoginData) => {
+    const response = await loginUser(userData);
+
+    if (response) {
+      const { data, error } = response as { data: any; error: any };
+
+      if (data) {
+        const { accessToken, refreshToken } = data;
+        localStorage.setItem('token', accessToken);
+        localStorage.setItem('refreshToken', refreshToken);
+        message.success('User was successfully signed in');
+        navigate('/');
+        return;
+      }
+
+      if (error) {
+        message.error(error.data.message);
+      }
+    }
   };
 
-  // call this function to sign out logged in user
   const logout = () => {
-    setUser(null);
-    navigate('/login', { replace: true });
+    localStorage.removeItem('token');
+    localStorage.removeItem('refreshToken');
+    navigate('/login');
   };
+
+  const register = async (registerData: RegistrationRequestData) => {
+    const response = await registerUser(registerData);
+
+    if (response) {
+      const { data, error } = response as { data: any; error: any };
+
+      if (data) {
+        const { accessToken, refreshToken } = data;
+        localStorage.setItem('token', accessToken);
+        localStorage.setItem('refreshToken', refreshToken);
+        message.success('User was successfully signed up');
+        navigate('/');
+        return;
+      }
+
+      if (error) {
+        message.error(error.data.message);
+      }
+    }
+  };
+
+  const fetchCurrentUser = () => {};
 
   const value = useMemo(
     () => ({
-      user,
+      registerResponse: registerResponse,
+      loginResponse: loginResponse,
       login,
       logout,
+      register,
+      fetchCurrentUser,
     }),
-    [user]
+    [registerResponse, loginResponse]
   );
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

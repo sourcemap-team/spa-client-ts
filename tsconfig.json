@@ -13,6 +13,7 @@
     "allowSyntheticDefaultImports": true,
     "paths": {
       "@pages/*": ["pages/*"],
+      "@modules/*": ["modules/*"],
       "@components/*": ["components/*"],
       "@hooks/*": ["hooks/*"],
       "@context/*": ["context/*"],

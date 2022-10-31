@@ -1,14 +1,17 @@
 import React, { FC } from 'react';
 import { Button, Form, Input } from 'antd';
-import { useAuth } from '@context/Auth';
 import { Link } from 'react-router-dom';
+
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 
-const RegisterPage: FC = () => {
-  const { login } = useAuth();
+import { useAuth } from '@context/Auth';
+import { RegistrationRequestData } from '../../../custom';
 
-  const onFinish = (values) => {
-    login(values);
+const RegisterPage: FC = () => {
+  const { register, registerResponse } = useAuth();
+
+  const onFinish = (registerData: RegistrationRequestData) => {
+    register(registerData);
   };
 
   return (
@@ -70,6 +73,7 @@ const RegisterPage: FC = () => {
 
           <Form.Item>
             <Button
+              loading={registerResponse.isLoading}
               type="primary"
               htmlType="submit"
               className="login-form-button"

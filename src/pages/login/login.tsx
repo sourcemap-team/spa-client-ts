@@ -2,13 +2,15 @@ import React, { FC } from 'react';
 import { Button, Checkbox, Form, Input } from 'antd';
 import { useAuth } from '@context/Auth';
 import { Link } from 'react-router-dom';
+
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { LoginData } from '../../../custom';
 
 const AuthPage: FC = () => {
-  const { login } = useAuth();
+  const { login, loginResponse } = useAuth();
 
-  const onFinish = (values) => {
-    login(values);
+  const onFinish = (loginData: LoginData) => {
+    login(loginData);
   };
 
   return (
@@ -23,6 +25,7 @@ const AuthPage: FC = () => {
             remember: true,
           }}
           onFinish={onFinish}
+          autoComplete={'on'}
         >
           <Form.Item
             name="username"
@@ -68,6 +71,7 @@ const AuthPage: FC = () => {
               type="primary"
               htmlType="submit"
               className="login-form-button"
+              loading={loginResponse.isLoading}
             >
               Sign in
             </Button>

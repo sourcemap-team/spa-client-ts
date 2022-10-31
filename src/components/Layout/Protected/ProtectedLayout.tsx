@@ -1,8 +1,8 @@
 import React, { FC, useState } from 'react';
-import { Layout } from 'antd';
+import { Layout, Skeleton } from 'antd';
 import { Navigate, Outlet } from 'react-router-dom';
 
-import { useAuth } from '@context/Auth';
+import { authApi } from '@services/auth';
 
 import TopMenu from '@components/TopMenu/TopMenu';
 import SideMenu from '@components/SideMenu/SideMenu';
@@ -10,14 +10,24 @@ import SideMenu from '@components/SideMenu/SideMenu';
 const { Header, Content, Sider } = Layout;
 
 export const ProtectedLayout: FC = () => {
-  const { user } = useAuth();
   const [collapsed, setCollapsed] = useState(true);
+
+  const { isLoading, isFetching } = authApi.endpoints.fetchMe.useQuery(null, {
+    skip: false,
+    refetchOnMountOrArgChange: true,
+  });
+
+  const { currentData } = authApi.endpoints.fetchMe.useQueryState(null);
 
   const handleCollapse = (newValue: boolean) => {
     setCollapsed(newValue);
   };
 
-  if (!user) {
+  if (isLoading || isFetching) {
+    return <Skeleton active />;
+  }
+
+  if (!currentData) {
     return <Navigate to="/login" />;
   }
 
@@ -30,7 +40,7 @@ export const ProtectedLayout: FC = () => {
         <Sider width={320} trigger={null} collapsible collapsed={collapsed}>
           <SideMenu collapsed={collapsed} onCollapse={handleCollapse} />
         </Sider>
-        <Content style={{ padding: '64px' }}>
+        <Content>
           <Outlet />
         </Content>
       </Layout>

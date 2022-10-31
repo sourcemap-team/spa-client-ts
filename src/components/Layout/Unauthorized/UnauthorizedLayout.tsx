@@ -1,17 +1,10 @@
 import React, { FC } from 'react';
 import { Layout } from 'antd';
-import { Navigate, Outlet } from 'react-router-dom';
-import { useAuth } from '@context/Auth';
+import { Outlet } from 'react-router-dom';
 
 const { Footer, Content } = Layout;
 
 export const UnauthorizedLayout: FC = () => {
-  const { user } = useAuth();
-
-  if (user) {
-    return <Navigate to="/" />;
-  }
-
   return (
     <Layout>
       <Content>

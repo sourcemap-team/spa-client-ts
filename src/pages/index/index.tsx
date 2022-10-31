@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
+import { PageHeader } from 'antd';
 const IndexPage: FC = () => {
   return (
     <div>
-      <h1>index</h1>
+      <PageHeader title="Home page" />
     </div>
   );
 };
