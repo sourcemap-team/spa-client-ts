@@ -1,11 +1,10 @@
 import React, { FC } from 'react';
-import { Button, Form, Input } from 'antd';
 import { Link } from 'react-router-dom';
-
+import { Button, Form, Input } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 
 import { useAuth } from '@context/Auth';
-import { RegistrationRequestData } from '../../../custom';
+import { RegistrationRequestData } from '@custom-types/index';
 
 const RegisterPage: FC = () => {
   const { register, registerResponse } = useAuth();
