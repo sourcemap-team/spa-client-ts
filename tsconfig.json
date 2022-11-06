@@ -1,5 +1,7 @@
 {
-
+  "include": [
+    "ts-modules"
+  ],
   "compilerOptions": {
     "baseUrl": "./src",
     "outDir": "./build/",
@@ -12,14 +14,30 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "paths": {
-      "@pages/*": ["pages/*"],
-      "@modules/*": ["modules/*"],
-      "@components/*": ["components/*"],
-      "@hooks/*": ["hooks/*"],
-      "@context/*": ["context/*"],
-      "@store/*": ["store/*"],
-      "@services/*": ["services/*"]
+      "@pages/*": [
+        "pages/*"
+      ],
+      "@modules/*": [
+        "modules/*"
+      ],
+      "@components/*": [
+        "components/*"
+      ],
+      "@hooks/*": [
+        "hooks/*"
+      ],
+      "@context/*": [
+        "context/*"
+      ],
+      "@store/*": [
+        "store/*"
+      ],
+      "@services/*": [
+        "services/*"
+      ],
+      "@custom-types/*": [
+        "custom-types/*"
+      ]
     }
-  },
- "include": ["./custom.d.ts"]
+  }
 }

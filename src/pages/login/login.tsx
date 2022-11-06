@@ -4,7 +4,9 @@ import { useAuth } from '@context/Auth';
 import { Link } from 'react-router-dom';
 
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { LoginData } from '../../../custom';
+import { LoginData } from '@custom-types/index';
+
+import styles from "./Login.module.scss";
 
 const AuthPage: FC = () => {
   const { login, loginResponse } = useAuth();
@@ -14,11 +16,11 @@ const AuthPage: FC = () => {
   };
 
   return (
-    <div style={{ margin: '64px auto' }}>
-      <h2 style={{ textAlign: 'center', marginBottom: '44px' }}>
+    <div className={styles.wrap}>
+      <h2 className={styles.title}>
         Sign In to Platform
       </h2>
-      <div style={{ maxWidth: '320px', margin: '0 auto' }}>
+      <div className={styles.formWrap}>
         <Form
           name="normal_login"
           initialValues={{

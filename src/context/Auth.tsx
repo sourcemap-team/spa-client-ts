@@ -1,9 +1,11 @@
 import React, { FC, ReactNode } from 'react';
 import { createContext, useContext, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { LoginData, RegistrationRequestData } from '../../custom';
-import { useLoginUserMutation, useRegisterUserMutation } from '@services/auth';
 import { message } from 'antd';
+
+import { useLoginUserMutation, useRegisterUserMutation } from '@services/auth';
+import { LoginData, RegistrationRequestData } from '@custom-types/index';
+
 export const AuthContext = createContext(null);
 
 type Props = {
@@ -63,7 +65,8 @@ export const AuthProvider: FC<Props> = ({ children }) => {
     }
   };
 
-  const fetchCurrentUser = () => {};
+  const fetchCurrentUser = () => {
+  };
 
   const value = useMemo(
     () => ({
